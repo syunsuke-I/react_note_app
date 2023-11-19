@@ -8,6 +8,7 @@ import uuid from "react-uuid"
 function App() {
 
   const [notes,setNotes] = useState([]);
+  const [activeNote,setActiveNotes] = useState(false);
 
   const onAddNote = () =>{
     const newNote = {
@@ -21,19 +22,27 @@ function App() {
   }
 
   const onDeleteNote = (id) =>{
-    const fillterNotes = notes.filter((note) => note.id !== id);
-    setNotes(fillterNotes);
+    const filterNotes = notes.filter((note) => note.id !== id);
+    setNotes(filterNotes);
+  }
+
+  const getActiveNote = () =>{
+      return notes.find((note) => note.id === activeNote)
   }
 
   return (
     <>
-      <div className="App">
+      <div className="App flex">
         <Sidebar 
           onAddNote={onAddNote} 
           notes={notes} 
           onDeleteNote={onDeleteNote}
+          activeNote={activeNote}
+          setActiveNotes={setActiveNotes}
         />
-        <Main/>
+        <Main
+          activeNote={getActiveNote()}
+        />
       </div>
     </>
   )

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Sidebar = ({ onAddNote, notes, onDeleteNote }) => {
+const Sidebar = ({ onAddNote, notes, onDeleteNote,setActiveNotes }) => {
   return (
     <>
       <div className="app-sidebar w-64 h-screen bg-gray-800 text-white p-4">
@@ -20,7 +20,8 @@ const Sidebar = ({ onAddNote, notes, onDeleteNote }) => {
               <div 
                 key={note.id} 
                 className="note bg-gray-700 p-3 rounded hover:outline-none hover:ring-2 hover:ring-blue-500 hover:bg-gray-600"
-                tabIndex="0" // フォーカス可能にするために tabIndex を追加
+                tabIndex="0"
+                onClick={() => setActiveNotes(note.id)} 
               >
                 <div className="title flex justify-between items-center mb-2">
                   <strong>{note.title}</strong>

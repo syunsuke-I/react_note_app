@@ -1,11 +1,37 @@
 import React from 'react';
 
-function Main() {
+function Main({activeNote}) {
+
+  if (!activeNote) {
+    return (
+      <div className="w-7/10 mx-auto h-screen flex items-center justify-center text-center text-gray-500">
+        ノートが選択されていません
+      </div>
+    );
+  }
 
   return (
     <>
-      <div className="Main">
-        Main
+      <div className="Main flex flex-col md:flex-row md:space-x-4 p-4">
+        <div className="note-edit flex-1">
+          <input 
+            type="text" 
+            className="w-full p-2 border border-gray-300 rounded mb-4"
+            placeholder="タイトルを記入"
+          />
+          <textarea 
+            placeholder="ノートの内容を記入" 
+            className="w-full h-64 p-2 border border-gray-300 rounded"
+          ></textarea>
+        </div>
+        <div className="preview flex-1">
+          <div className="markdown-preview bg-white p-4 border border-gray-300 rounded">
+            <h1 className="preview-title mb-4">{activeNote.title}</h1>
+            {/* プレビュー内容をここに挿入 */}
+            {activeNote.content}
+            内容
+          </div>
+        </div>
       </div>
     </>
   )
