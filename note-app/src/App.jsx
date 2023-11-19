@@ -16,6 +16,11 @@ function App() {
     localStorage.setItem("notes",JSON.stringify(notes));
   },[notes]);
 
+  useEffect(()=>{
+    if (notes.length > 0)
+    setActiveNotes(notes[0].id);
+  },[]);
+
   const onAddNote = () =>{
     const newNote = {
       id:uuid(),
