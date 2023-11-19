@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from "react-markdown"
 
 function Main({activeNote,onUpdateNote}) {
 
@@ -42,8 +43,9 @@ function Main({activeNote,onUpdateNote}) {
           <div className="markdown-preview bg-white p-4 border border-gray-300 rounded">
             <h1 className="preview-title mb-4">{activeNote.title}</h1>
             {/* プレビュー内容をここに挿入 */}
-            {activeNote.content}
-            内容
+            <ReactMarkdown>
+              {activeNote.content}
+            </ReactMarkdown>
           </div>
         </div>
       </div>
