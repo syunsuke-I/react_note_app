@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Sidebar = ({ onAddNote, notes, onDeleteNote,setActiveNotes }) => {
+  
+  const sortedNotes = notes.sort((a,b) => b.modDate - a.modDate);
+
   return (
     <>
       <div className="app-sidebar w-64 h-screen bg-gray-800 text-white p-4">
@@ -15,7 +18,7 @@ const Sidebar = ({ onAddNote, notes, onDeleteNote,setActiveNotes }) => {
           </button>
         </div>
         <div className="notes space-y-4">
-          {notes.map((note) => {
+          {sortedNotes.map((note) => {
             return (
               <div 
                 key={note.id} 
