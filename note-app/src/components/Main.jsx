@@ -1,6 +1,14 @@
 import React from 'react';
 
-function Main({activeNote}) {
+function Main({activeNote,onUpdateNote}) {
+
+  const onEditNote = (key,value) =>{
+    onUpdateNote({
+      ...activeNote,
+      [key]: value,
+      modDate: Date.now(),
+    });
+  };
 
   if (!activeNote) {
     return (
@@ -14,14 +22,20 @@ function Main({activeNote}) {
     <>
       <div className="Main flex flex-col md:flex-row md:space-x-4 p-4">
         <div className="note-edit flex-1">
-          <input 
-            type="text" 
+          <input
+            id='title' 
+            type="text"
+            value={activeNote.title}
             className="w-full p-2 border border-gray-300 rounded mb-4"
             placeholder="タイトルを記入"
+            onChange={(e)=>onEditNote("title",e.target.value)}
           />
-          <textarea 
+          <textarea
+            id='content'
             placeholder="ノートの内容を記入" 
             className="w-full h-64 p-2 border border-gray-300 rounded"
+            value={activeNote.content}
+            onChange={(e)=>onEditNote("content",e.target.value)}
           ></textarea>
         </div>
         <div className="preview flex-1">
