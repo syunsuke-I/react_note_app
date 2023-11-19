@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 import Main from './components/Main'
@@ -7,14 +7,20 @@ import uuid from "react-uuid"
 
 function App() {
 
-  const [notes,setNotes] = useState([]);
+  const [notes,setNotes] = useState(
+    JSON.parse(localStorage.getItem("notes")) || []
+  );
   const [activeNote,setActiveNotes] = useState(false);
+
+  useEffect(()=>{
+    localStorage.setItem("notes",JSON.stringify(notes));
+  },[notes]);
 
   const onAddNote = () =>{
     const newNote = {
       id:uuid(),
-      title:"タイトル",
-      content:"内容",
+      title:"title",
+      content:"content",
       modDate: Date.now(),
     };
     setNotes([...notes,newNote]);
